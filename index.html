@@ -1,0 +1,1585 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Augustas ir Barbora | Love Story Café — Vilnius</title>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --ink: #1a1a1a;
+            --ink-light: #2d2d2d;
+            --concrete: #8a8a8a;
+            --warm-gray: #b5b0a8;
+            --cream: #f4f1ec;
+            --parchment: #faf8f5;
+            --blush: #d4a5a5;
+            --blush-light: #e8c4c4;
+            --blush-deep: #b88080;
+            --emerald: #2d5a3d;
+            --emerald-light: #4a7c5f;
+            --emerald-dark: #1a3d28;
+            --gold: #c9a96e;
+            --gold-light: #d4b87a;
+            --rose: #c9a0a0;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Space Grotesk', sans-serif;
+            background: var(--parchment);
+            color: var(--ink);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        ::selection {
+            background: var(--blush-deep);
+            color: white;
+        }
+
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: var(--cream); }
+        ::-webkit-scrollbar-thumb { background: var(--blush); border-radius: 3px; }
+
+        .noise-overlay {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            pointer-events: none;
+            z-index: 9999;
+            opacity: 0.02;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0; width: 100%;
+            z-index: 1000;
+            padding: 1.5rem 4rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        nav.scrolled {
+            background: rgba(250, 248, 245, 0.92);
+            backdrop-filter: blur(20px) saturate(180%);
+            padding: 1rem 4rem;
+            box-shadow: 0 1px 0 rgba(0,0,0,0.05);
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--ink);
+            text-decoration: none;
+            letter-spacing: -0.5px;
+            position: relative;
+        }
+
+        .logo::after {
+            content: '';
+            position: absolute;
+            bottom: -2px; left: 0;
+            width: 100%; height: 2px;
+            background: var(--blush-deep);
+            transform: scaleX(0);
+            transform-origin: right;
+            transition: transform 0.4s ease;
+        }
+
+        .logo:hover::after {
+            transform: scaleX(1);
+            transform-origin: left;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 3rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--ink);
+            font-weight: 500;
+            font-size: 0.85rem;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            position: relative;
+            padding: 0.5rem 0;
+            transition: color 0.3s;
+        }
+
+        .nav-links a::before {
+            content: '';
+            position: absolute;
+            bottom: 0; left: 0;
+            width: 0; height: 1.5px;
+            background: var(--blush-deep);
+            transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .nav-links a:hover::before { width: 100%; }
+        .nav-links a:hover { color: var(--blush-deep); }
+
+        /* Hero */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-bg {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d1f1f 40%, #1a1a1a 100%);
+        }
+
+        .hero-bg::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: url('https://kimi-web-img.moonshot.cn/img/dynamic-media-cdn.tripadvisor.com/07063d972f0c69ce5b79e31369c3ac52f70f00d7.jpg') center/cover;
+            opacity: 0.25;
+            filter: brightness(0.6) saturate(1.2);
+        }
+
+        .hero-grid-pattern {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            opacity: 0.03;
+            background-image: 
+                linear-gradient(rgba(212,165,165,0.3) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(212,165,165,0.3) 1px, transparent 1px);
+            background-size: 60px 60px;
+        }
+
+        .floating-petal {
+            position: absolute;
+            width: 30px; height: 30px;
+            background: var(--blush);
+            border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+            opacity: 0.08;
+            animation: floatPetal 8s ease-in-out infinite;
+        }
+
+        .floating-petal:nth-child(1) { top: 15%; left: 10%; animation-delay: 0s; width: 25px; height: 25px; }
+        .floating-petal:nth-child(2) { top: 60%; right: 15%; animation-delay: 3s; width: 20px; height: 20px; }
+        .floating-petal:nth-child(3) { bottom: 25%; left: 25%; animation-delay: 6s; width: 28px; height: 28px; }
+        .floating-petal:nth-child(4) { top: 40%; left: 70%; animation-delay: 2s; width: 18px; height: 18px; }
+
+        @keyframes floatPetal {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-25px) rotate(15deg); }
+        }
+
+        .hero-content {
+            text-align: center;
+            z-index: 2;
+            max-width: 900px;
+            padding: 2rem;
+            position: relative;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+            border: 1px solid rgba(212, 165, 165, 0.4);
+            color: var(--blush-light);
+            padding: 0.6rem 1.5rem;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 2.5rem;
+            animation: fadeInDown 1.2s ease;
+        }
+
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.5rem, 7vw, 5.5rem);
+            font-weight: 700;
+            color: var(--parchment);
+            line-height: 1.1;
+            margin-bottom: 1rem;
+            animation: fadeInUp 1s ease 0.3s both;
+            letter-spacing: -1px;
+        }
+
+        .hero h1 .ampersand {
+            font-style: italic;
+            font-weight: 400;
+            color: var(--blush-light);
+            display: inline-block;
+            margin: 0 0.3rem;
+        }
+
+        .hero-subtitle {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            font-size: 1.3rem;
+            color: rgba(244, 241, 236, 0.7);
+            margin-bottom: 1.5rem;
+            animation: fadeInUp 1s ease 0.5s both;
+        }
+
+        .hero-desc {
+            font-size: 1.05rem;
+            color: rgba(244, 241, 236, 0.5);
+            margin-bottom: 3rem;
+            line-height: 1.8;
+            max-width: 550px;
+            margin-left: auto;
+            margin-right: auto;
+            animation: fadeInUp 1s ease 0.6s both;
+            font-weight: 300;
+        }
+
+        .hero-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.8rem;
+            background: var(--blush-deep);
+            color: white;
+            padding: 1.1rem 2.5rem;
+            border-radius: 0;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            animation: fadeInUp 1s ease 0.8s both;
+            border: 2px solid var(--blush-deep);
+        }
+
+        .hero-cta:hover {
+            background: transparent;
+            color: var(--blush-light);
+            transform: translateY(-2px);
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+            color: rgba(244, 241, 236, 0.3);
+            font-size: 0.7rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            animation: bounce 2s infinite;
+        }
+
+        .scroll-line {
+            width: 1px;
+            height: 40px;
+            background: linear-gradient(to bottom, var(--blush), transparent);
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(10px); }
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(40px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Section Styles */
+        .section-header {
+            text-align: center;
+            margin-bottom: 5rem;
+        }
+
+        .section-label {
+            display: inline-block;
+            color: var(--blush-deep);
+            font-weight: 600;
+            font-size: 0.75rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 1.2rem;
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2rem, 4vw, 3.2rem);
+            color: var(--ink);
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+
+        .section-subtitle {
+            color: var(--concrete);
+            font-size: 1.05rem;
+            max-width: 550px;
+            margin: 0 auto;
+            line-height: 1.7;
+        }
+
+        /* Legend Section */
+        .legend {
+            padding: 10rem 2rem;
+            background: var(--parchment);
+            position: relative;
+        }
+
+        .legend::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 50%;
+            transform: translateX(-50%);
+            width: 1px; height: 80px;
+            background: linear-gradient(to bottom, transparent, var(--blush));
+        }
+
+        .legend-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 5rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            align-items: center;
+        }
+
+        .legend-image {
+            position: relative;
+        }
+
+        .legend-image img {
+            width: 100%;
+            height: 600px;
+            object-fit: cover;
+            transition: all 0.5s ease;
+        }
+
+        .legend-image::after {
+            content: '';
+            position: absolute;
+            top: 20px; left: 20px;
+            width: 100%; height: 100%;
+            border: 2px solid var(--blush);
+            z-index: -1;
+            opacity: 0.3;
+        }
+
+        .legend-text h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.2rem;
+            color: var(--ink);
+            margin-bottom: 1.5rem;
+            line-height: 1.3;
+        }
+
+        .legend-text h3 em {
+            font-style: italic;
+            color: var(--blush-deep);
+        }
+
+        .legend-text p {
+            color: var(--concrete);
+            line-height: 1.9;
+            margin-bottom: 1.5rem;
+            font-size: 1.05rem;
+        }
+
+        .legend-quote {
+            border-left: 3px solid var(--blush-deep);
+            padding-left: 1.5rem;
+            margin: 2rem 0;
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            font-size: 1.3rem;
+            color: var(--ink-light);
+            line-height: 1.6;
+        }
+
+        .legend-quote cite {
+            display: block;
+            margin-top: 0.8rem;
+            font-family: 'Space Grotesk', sans-serif;
+            font-style: normal;
+            font-size: 0.85rem;
+            color: var(--concrete);
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        /* Philosophy Strip */
+        .philosophy-strip {
+            background: var(--ink);
+            padding: 5rem 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .philosophy-strip::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: url('https://kimi-web-img.moonshot.cn/img/media-cdn.tripadvisor.com/60be998a1e01f1f3b6ddb30b7b50f8ff4b0d62b2.jpg') center/cover;
+            opacity: 0.08;
+            filter: grayscale(50%);
+        }
+
+        .philosophy-strip > * { position: relative; z-index: 1; }
+
+        .philosophy-strip h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            color: var(--parchment);
+            margin-bottom: 1rem;
+        }
+
+        .philosophy-strip p {
+            color: rgba(244, 241, 236, 0.6);
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.7;
+        }
+
+        .love-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(212, 165, 165, 0.15);
+            border: 1px solid rgba(212, 165, 165, 0.3);
+            color: var(--blush-light);
+            padding: 0.8rem 2rem;
+            margin-top: 2rem;
+            font-size: 0.85rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        /* Menu Section */
+        .menu-section {
+            padding: 10rem 2rem;
+            background: var(--cream);
+        }
+
+        .menu-container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .menu-category-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            color: var(--ink);
+            margin: 3rem 0 1.5rem;
+            padding-bottom: 0.8rem;
+            border-bottom: 1px solid rgba(0,0,0,0.08);
+        }
+
+        .menu-category-title:first-child { margin-top: 0; }
+
+        .menu-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            padding: 1.2rem 0;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .menu-item::before {
+            content: '';
+            position: absolute;
+            left: -20px; top: 50%;
+            transform: translateY(-50%);
+            width: 4px; height: 0;
+            background: var(--blush-deep);
+            transition: height 0.3s ease;
+        }
+
+        .menu-item:hover::before { height: 60%; }
+        .menu-item:hover { padding-left: 10px; }
+
+        .menu-item-name {
+            font-weight: 500;
+            font-size: 1.05rem;
+            color: var(--ink);
+        }
+
+        .menu-item-desc {
+            font-size: 0.85rem;
+            color: var(--concrete);
+            margin-top: 0.2rem;
+        }
+
+        .menu-dots {
+            flex: 1;
+            border-bottom: 1px dotted rgba(0,0,0,0.15);
+            margin: 0 1rem;
+            position: relative;
+            top: -4px;
+        }
+
+        .menu-price {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--blush-deep);
+            white-space: nowrap;
+        }
+
+        .menu-note {
+            text-align: center;
+            margin-top: 3rem;
+            padding: 1.5rem;
+            background: var(--parchment);
+            border: 1px solid rgba(0,0,0,0.05);
+            font-size: 0.9rem;
+            color: var(--concrete);
+        }
+
+        .menu-note i {
+            color: var(--blush-deep);
+            margin-right: 0.5rem;
+        }
+
+        /* Experience Section */
+        .experience {
+            padding: 10rem 2rem;
+            background: var(--parchment);
+        }
+
+        .experience-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .experience-card {
+            background: white;
+            padding: 3rem 2rem;
+            text-align: center;
+            border: 1px solid rgba(0,0,0,0.04);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .experience-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 3px;
+            background: var(--blush-deep);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.4s ease;
+        }
+
+        .experience-card:hover::before { transform: scaleX(1); }
+
+        .experience-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.08);
+        }
+
+        .experience-icon {
+            font-size: 2rem;
+            color: var(--blush-deep);
+            margin-bottom: 1.5rem;
+            display: inline-block;
+        }
+
+        .experience-card h4 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: var(--ink);
+        }
+
+        .experience-card p {
+            color: var(--concrete);
+            font-size: 0.95rem;
+            line-height: 1.7;
+        }
+
+        /* Gallery Section */
+        .gallery {
+            padding: 10rem 2rem;
+            background: var(--ink);
+        }
+
+        .gallery .section-title { color: var(--parchment); }
+        .gallery .section-subtitle { color: rgba(244, 241, 236, 0.5); }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-template-rows: 300px 300px;
+            gap: 1px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .gallery-item img {
+            width: 100%; height: 100%;
+            object-fit: cover;
+            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.08);
+        }
+
+        .gallery-item.large {
+            grid-column: span 2;
+            grid-row: span 2;
+        }
+
+        .gallery-item.wide {
+            grid-column: span 2;
+        }
+
+        .gallery-caption {
+            position: absolute;
+            bottom: 0; left: 0; right: 0;
+            padding: 2rem;
+            background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);
+            color: white;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .gallery-item:hover .gallery-caption { opacity: 1; }
+
+        .gallery-caption h4 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.2rem;
+        }
+
+        /* Visit Section */
+        .visit {
+            padding: 10rem 2rem;
+            background: var(--cream);
+        }
+
+        .visit-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 5rem;
+            max-width: 1100px;
+            margin: 0 auto;
+            align-items: center;
+        }
+
+        .visit-info h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.2rem;
+            color: var(--ink);
+            margin-bottom: 1.5rem;
+        }
+
+        .visit-info > p {
+            color: var(--concrete);
+            line-height: 1.8;
+            margin-bottom: 2.5rem;
+            font-size: 1.05rem;
+        }
+
+        .visit-detail {
+            display: flex;
+            align-items: flex-start;
+            gap: 1.2rem;
+            padding: 1.2rem 0;
+            border-bottom: 1px solid rgba(0,0,0,0.06);
+        }
+
+        .visit-detail i {
+            color: var(--blush-deep);
+            font-size: 1.1rem;
+            margin-top: 0.2rem;
+            width: 20px;
+        }
+
+        .visit-detail-content h4 {
+            font-weight: 600;
+            color: var(--ink);
+            margin-bottom: 0.2rem;
+            font-size: 0.95rem;
+        }
+
+        .visit-detail-content p {
+            color: var(--concrete);
+            font-size: 0.9rem;
+        }
+
+        .visit-map {
+            border-radius: 0;
+            overflow: hidden;
+            box-shadow: 0 30px 80px rgba(0,0,0,0.12);
+            height: 500px;
+            position: relative;
+        }
+
+        .visit-map iframe {
+            width: 100%; height: 100%;
+            border: none;
+            filter: grayscale(20%);
+        }
+
+        /* Reviews Section */
+        .reviews {
+            padding: 10rem 2rem;
+            background: var(--parchment);
+        }
+
+        .reviews-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .review-card {
+            background: white;
+            padding: 2.5rem;
+            border: 1px solid rgba(0,0,0,0.04);
+            position: relative;
+            transition: all 0.4s;
+        }
+
+        .review-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 50px rgba(0,0,0,0.06);
+        }
+
+        .review-stars {
+            color: var(--gold);
+            font-size: 0.85rem;
+            margin-bottom: 1.2rem;
+            letter-spacing: 2px;
+        }
+
+        .review-text {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            font-size: 1.1rem;
+            color: var(--ink-light);
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+        }
+
+        .review-author {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .review-avatar {
+            width: 42px; height: 42px;
+            border-radius: 50%;
+            background: var(--ink);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .review-name {
+            font-weight: 600;
+            color: var(--ink);
+            font-size: 0.9rem;
+        }
+
+        .review-source {
+            font-size: 0.8rem;
+            color: var(--concrete);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--ink);
+            color: var(--parchment);
+            padding: 6rem 2rem 3rem;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 4rem;
+            max-width: 1200px;
+            margin: 0 auto 4rem;
+        }
+
+        .footer-brand h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            margin-bottom: 1.2rem;
+            color: var(--parchment);
+        }
+
+        .footer-brand p {
+            color: rgba(244, 241, 236, 0.5);
+            line-height: 1.8;
+            font-size: 0.95rem;
+        }
+
+        .footer-links h4 {
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            color: var(--parchment);
+            font-size: 0.85rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .footer-links ul { list-style: none; }
+        .footer-links li { margin-bottom: 0.9rem; }
+
+        .footer-links a {
+            color: rgba(244, 241, 236, 0.5);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.3s;
+            position: relative;
+        }
+
+        .footer-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -2px; left: 0;
+            width: 0; height: 1px;
+            background: var(--blush);
+            transition: width 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: var(--blush-light);
+        }
+
+        .footer-links a:hover::after { width: 100%; }
+
+        .social-links {
+            display: flex;
+            gap: 0.8rem;
+            margin-top: 2rem;
+        }
+
+        .social-links a {
+            width: 42px; height: 42px;
+            border: 1px solid rgba(244, 241, 236, 0.15);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: rgba(244, 241, 236, 0.6);
+            text-decoration: none;
+            transition: all 0.3s;
+            font-size: 0.9rem;
+        }
+
+        .social-links a:hover {
+            border-color: var(--blush);
+            color: var(--blush-light);
+            transform: translateY(-3px);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(244, 241, 236, 0.08);
+            padding-top: 2rem;
+            text-align: center;
+            color: rgba(244, 241, 236, 0.3);
+            font-size: 0.85rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Scroll Reveal */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.9s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .reveal-delay-1 { transition-delay: 0.1s; }
+        .reveal-delay-2 { transition-delay: 0.2s; }
+        .reveal-delay-3 { transition-delay: 0.3s; }
+
+        /* Lightbox */
+        .lightbox {
+            display: none;
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(0,0,0,0.95);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .lightbox.active { display: flex; }
+
+        .lightbox img {
+            max-width: 90%;
+            max-height: 90%;
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 30px; right: 40px;
+            color: white;
+            font-size: 2.5rem;
+            cursor: pointer;
+            font-weight: 300;
+        }
+
+        /* Mobile */
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.3rem;
+            color: var(--ink);
+            cursor: pointer;
+        }
+
+        @media (max-width: 968px) {
+            .legend-grid,
+            .visit-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .experience-grid,
+            .reviews-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .gallery-grid {
+                grid-template-columns: repeat(2, 1fr);
+                grid-template-rows: repeat(3, 200px);
+            }
+
+            .gallery-item.large {
+                grid-column: span 2;
+                grid-row: span 1;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .nav-links { display: none; }
+            .mobile-menu-btn { display: block; }
+            nav, nav.scrolled { padding: 1rem 2rem; }
+        }
+
+        @media (max-width: 600px) {
+            .gallery-grid {
+                grid-template-columns: 1fr;
+                grid-template-rows: repeat(5, 250px);
+            }
+
+            .gallery-item.large,
+            .gallery-item.wide {
+                grid-column: span 1;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+<base target="_blank">
+</head>
+<body>
+    <div class="noise-overlay"></div>
+
+    <!-- Navigation -->
+    <nav id="navbar">
+        <a href="#" class="logo">Augustas ir Barbora</a>
+        <ul class="nav-links">
+            <li><a href="#legend">The Legend</a></li>
+            <li><a href="#menu">Menu</a></li>
+            <li><a href="#experience">Experience</a></li>
+            <li><a href="#visit">Visit</a></li>
+            <li><a href="#reviews">Reviews</a></li>
+        </ul>
+        <button class="mobile-menu-btn"><i class="fas fa-bars"></i></button>
+    </nav>
+
+    <!-- Hero -->
+    <section class="hero" id="home">
+        <div class="hero-bg"></div>
+        <div class="hero-grid-pattern"></div>
+        <div class="floating-petal"></div>
+        <div class="floating-petal"></div>
+        <div class="floating-petal"></div>
+        <div class="floating-petal"></div>
+        <div class="hero-content">
+            <div class="hero-badge">
+                <i class="fas fa-heart"></i>
+                Love Story Café — Vilnius, Lithuania
+            </div>
+            <h1>
+                Augustas<span class="ampersand">ir</span>Barbora
+            </h1>
+            <p class="hero-subtitle">A Love Story Written in Roses</p>
+            <p class="hero-desc">
+                Step into the most romantic café in Vilnius, where the tragic love of 
+                Grand Duchess Barbora and King Žygimantas Augustas lives on through 
+                hanging roses, velvet seats, and eternal devotion.
+            </p>
+            <a href="#legend" class="hero-cta">
+                Discover the Legend
+                <i class="fas fa-arrow-down"></i>
+            </a>
+        </div>
+        <div class="scroll-indicator">
+            <span>Scroll</span>
+            <div class="scroll-line"></div>
+        </div>
+    </section>
+
+    <!-- Legend Section -->
+    <section class="legend" id="legend">
+        <div class="legend-grid">
+            <div class="legend-image reveal">
+                <img src="https://kimi-web-img.moonshot.cn/img/media-cdn.tripadvisor.com/60be998a1e01f1f3b6ddb30b7b50f8ff4b0d62b2.jpg" alt="Augustas ir Barbora Interior">
+            </div>
+            <div class="legend-text reveal reveal-delay-1">
+                <span class="section-label">The Legend</span>
+                <h3>A Love That Defied <em>an Empire</em></h3>
+                <p>
+                    In the 16th century, Barbora Radvilaitė — one of the most beautiful women 
+                    in Europe — fell in love with Žygimantas Augustas, King of Poland and 
+                    Grand Duke of Lithuania. Their secret affair scandalized the court.
+                </p>
+                <p>
+                    Against medieval custom, Augustas married Barbora in secret at Vilnius Cathedral. 
+                    When Queen Bona discovered the union, she broke all ties with her son. 
+                    The court demanded divorce. Augustas refused — threatening to dissolve parliament 
+                    unless Barbora was crowned Queen of Poland.
+                </p>
+                <div class="legend-quote">
+                    "He wore black every day of his life after she was gone."
+                    <cite>— The Chronicles of Lithuania</cite>
+                </div>
+                <p>
+                    Tragically, Barbora died just six months after her coronation. Many believed 
+                    Queen Bona poisoned her. Augustas ensured she was buried in Vilnius, where 
+                    they first fell in love. In 1931, her remains were found beneath the Cathedral — 
+                    and the secret corridor they used to meet was discovered at Radvila Palace.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Philosophy Strip -->
+    <section class="philosophy-strip">
+        <div class="reveal">
+            <h3>Love, <em style="color: var(--blush-light); font-style: italic;">Eternal.</em></h3>
+            <p>
+                Our café is more than a place to eat — it is a living tribute to the greatest 
+                love story Lithuania has ever known. Every rose, every velvet seat, every 
+                champagne breakfast is inspired by a devotion that outlived death itself.
+            </p>
+            <div class="love-badge">
+                <i class="fas fa-heart"></i>
+                Inspired by True Love Since 2019
+            </div>
+        </div>
+    </section>
+
+    <!-- Menu Section -->
+    <section class="menu-section" id="menu">
+        <div class="menu-container">
+            <div class="section-header reveal">
+                <span class="section-label">What We Serve</span>
+                <h2 class="section-title">The Menu</h2>
+                <p class="section-subtitle">Champagne breakfasts, afternoon teas, and romantic dinners beneath the roses.</p>
+            </div>
+
+            <h3 class="menu-category-title reveal">Champagne Breakfast</h3>
+            <div class="menu-item reveal">
+                <div>
+                    <div class="menu-item-name">Continental Breakfast</div>
+                    <div class="menu-item-desc">Fresh croissant, coffee, orange juice</div>
+                </div>
+                <div class="menu-dots"></div>
+                <div class="menu-price">€12.00</div>
+            </div>
+            <div class="menu-item reveal">
+                <div>
+                    <div class="menu-item-name">Royal Breakfast for Two</div>
+                    <div class="menu-item-desc">Assorted pastries, champagne, fresh fruits</div>
+                </div>
+                <div class="menu-dots"></div>
+                <div class="menu-price">€35.00</div>
+            </div>
+            <div class="menu-item reveal">
+                <div>
+                    <div class="menu-item-name">Eggs Benedict</div>
+                    <div class="menu-item-desc">Poached eggs, hollandaise, smoked salmon</div>
+                </div>
+                <div class="menu-dots"></div>
+                <div class="menu-price">€14.00</div>
+            </div>
+            <div class="menu-item reveal">
+                <div>
+                    <div class="menu-item-name">Pancakes with Berries</div>
+                    <div class="menu-item-desc">Fluffy pancakes, maple syrup, fresh berries</div>
+                </div>
+                <div class="menu-dots"></div>
+                <div class="menu-price">€11.00</div>
+            </div>
+
+            <h3 class="menu-category-title reveal">Coffee & Tea</h3>
+            <div class="menu-item reveal">
+                <div>
+                    <div class="menu-item-name">Espresso</div>
+                    <div class="menu-item-desc">Rich and bold</div>
+                </div>
+                <div class="menu-dots"></div>
+                <div class="menu-price">€3.50</div>
+            </div>
+            <div class="menu-item reveal">
+                <div>
+                    <div class="menu-item-name">Cappuccino</div>
+                    <div class="menu-item-desc">Velvety foam on rich espresso</div>
+                </div>
+                <div class="menu-dots"></div>
+                <div class="menu-price">€4.50</div>
+            </div>
+            <div class="menu-item reveal">
+                <div>
+                    <div class="menu-item-name">Latte</div>
+                    <div class="menu-item-desc">Smooth espresso with steamed milk</div>
+                </div>
+                <div class="menu-dots"></div>
+                <div class="menu-price">€4.50</div>
+            </div>
+            <div class="menu-item reveal">
+                <div>
+                    <div class="menu-item-name">Iced Coffee</div>
+                    <div class="menu-item-desc">Refreshing cold brew with cream</div>
+                </div>
+                <div class="menu-dots"></div>
+                <div class="menu-price">€5.00</div>
+            </div>
+            <div class="menu-item reveal">
+                <div>
+                    <div class="menu-item-name">Tea Selection</div>
+                    <div class="menu-item-desc">Earl Grey, green tea, herbal blends</div>
+                </div>
+                <div class="menu-dots"></div>
+                <div class="menu-price">€4.00</div>
+            </div>
+
+            <h3 class="menu-category-title reveal">Afternoon Tea & Desserts</h3>
+            <div class="menu-item reveal">
+                <div>
+                    <div class="menu-item-name">Afternoon Tea for Two</div>
+                    <div class="menu-item-desc">Mini sandwiches, cheese plate, mini desserts, 2 coffees or teas</div>
+                </div>
+                <div class="menu-dots"></div>
+                <div class="menu-price">€55.00</div>
+            </div>
+            <div class="menu-item reveal">
+                <div>
+                    <div class="menu-item-name">Rose Cupcake</div>
+                    <div class="menu-item-desc">Vanilla cupcake with rose buttercream</div>
+                </div>
+                <div class="menu-dots"></div>
+                <div class="menu-price">€5.00</div>
+            </div>
+            <div class="menu-item reveal">
+                <div>
+                    <div class="menu-item-name">Chocolate Fondant</div>
+                    <div class="menu-item-desc">Warm chocolate cake with molten center</div>
+                </div>
+                <div class="menu-dots"></div>
+                <div class="menu-price">€8.00</div>
+            </div>
+            <div class="menu-item reveal">
+                <div>
+                    <div class="menu-item-name">Cheesecake</div>
+                    <div class="menu-item-desc">New York style with berry compote</div>
+                </div>
+                <div class="menu-dots"></div>
+                <div class="menu-price">€7.00</div>
+            </div>
+            <div class="menu-item reveal">
+                <div>
+                    <div class="menu-item-name">Tiramisu</div>
+                    <div class="menu-item-desc">Classic Italian with espresso layers</div>
+                </div>
+                <div class="menu-dots"></div>
+                <div class="menu-price">€7.50</div>
+            </div>
+
+            <h3 class="menu-category-title reveal">Cocktails & Wine</h3>
+            <div class="menu-item reveal">
+                <div>
+                    <div class="menu-item-name">Barbora's Kiss</div>
+                    <div class="menu-item-desc">Prosecco, rose syrup, fresh raspberries</div>
+                </div>
+                <div class="menu-dots"></div>
+                <div class="menu-price">€12.00</div>
+            </div>
+            <div class="menu-item reveal">
+                <div>
+                    <div class="menu-item-name">Augustas' Secret</div>
+                    <div class="menu-item-desc">Gin, elderflower, cucumber, lime</div>
+                </div>
+                <div class="menu-dots"></div>
+                <div class="menu-price">€13.00</div>
+            </div>
+            <div class="menu-item reveal">
+                <div>
+                    <div class="menu-item-name">Glass of Champagne</div>
+                    <div class="menu-item-desc">Premium French champagne</div>
+                </div>
+                <div class="menu-dots"></div>
+                <div class="menu-price">€15.00</div>
+            </div>
+
+            <div class="menu-note reveal">
+                <i class="fas fa-leaf"></i>
+                <strong>Vegetarian-friendly options available.</strong> Seasonal menus change throughout the year. 
+                Follow us on Instagram @augustasirbarboracafe for our latest creations.
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section class="experience" id="experience">
+        <div class="container">
+            <div class="section-header reveal">
+                <span class="section-label">The Experience</span>
+                <h2 class="section-title">What Awaits You</h2>
+                <p class="section-subtitle">Three reasons lovers from around the world find their way to our door.</p>
+            </div>
+            <div class="experience-grid">
+                <div class="experience-card reveal">
+                    <div class="experience-icon"><i class="fas fa-camera-retro"></i></div>
+                    <h4>Instagrammable Paradise</h4>
+                    <p>From the flower-covered facade to the hanging rose trellises inside, every corner is designed for unforgettable photos. Seasonal displays that win competitions year after year.</p>
+                </div>
+                <div class="experience-card reveal reveal-delay-1">
+                    <div class="experience-icon"><i class="fas fa-utensils"></i></div>
+                    <h4>Culinary Romance</h4>
+                    <p>Champagne breakfasts, curated afternoon teas, and cocktails named after the legendary lovers. Every dish is as beautiful as it is delicious.</p>
+                </div>
+                <div class="experience-card reveal reveal-delay-2">
+                    <div class="experience-icon"><i class="fas fa-heart"></i></div>
+                    <h4>A Living Legend</h4>
+                    <p>More than decor — this is a shrine to eternal love. Sit where centuries of longing once stood. Feel the story in every petal, every sip, every glance across the table.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section class="gallery" id="gallery">
+        <div class="container">
+            <div class="section-header reveal">
+                <span class="section-label">Inside</span>
+                <h2 class="section-title">The Space</h2>
+                <p class="section-subtitle">Pink velvet, emerald trellises, and roses that never wilt.</p>
+            </div>
+            <div class="gallery-grid">
+                <div class="gallery-item large" onclick="openLightbox(this)">
+                    <img src="https://kimi-web-img.moonshot.cn/img/dynamic-media-cdn.tripadvisor.com/07063d972f0c69ce5b79e31369c3ac52f70f00d7.jpg" alt="The Rose Garden">
+                    <div class="gallery-caption">
+                        <h4>The Rose Garden</h4>
+                    </div>
+                </div>
+                <div class="gallery-item" onclick="openLightbox(this)">
+                    <img src="https://kimi-web-img.moonshot.cn/img/ak-d.tripcdn.com/22ba4c387fdd131a8981c28c2d13f6cb41d2ddca.jpg" alt="The Bar">
+                    <div class="gallery-caption">
+                        <h4>The Bar</h4>
+                    </div>
+                </div>
+                <div class="gallery-item" onclick="openLightbox(this)">
+                    <img src="https://kimi-web-img.moonshot.cn/img/media-cdn.tripadvisor.com/f888ae32b34be0ebc1822feda6e53943bfeca55b.jpg" alt="The Garden">
+                    <div class="gallery-caption">
+                        <h4>The Garden</h4>
+                    </div>
+                </div>
+                <div class="gallery-item wide" onclick="openLightbox(this)">
+                    <img src="https://kimi-web-img.moonshot.cn/img/media-cdn.tripadvisor.com/98334992139941cde771ef0e16cb722f6baffd8e.jpg" alt="The Details">
+                    <div class="gallery-caption">
+                        <h4>The Details</h4>
+                    </div>
+                </div>
+                <div class="gallery-item" onclick="openLightbox(this)">
+                    <img src="https://kimi-web-img.moonshot.cn/img/media-cdn.tripadvisor.com/ea7a64cee55d8526db6e4bcc3401993935da89f7.jpg" alt="The Atmosphere">
+                    <div class="gallery-caption">
+                        <h4>The Atmosphere</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Visit Section -->
+    <section class="visit" id="visit">
+        <div class="visit-grid">
+            <div class="visit-info reveal">
+                <span class="section-label">Find Us</span>
+                <h3>In the Heart of Old Town</h3>
+                <p>
+                    Tucked away on Stiklių Gatvé in Vilnius' Jewish Quarter, our café is 
+                    a hidden treasure waiting to be discovered. Look for the flower-covered 
+                    facade — you can't miss it.
+                </p>
+                <div class="visit-detail">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <div class="visit-detail-content">
+                        <h4>Address</h4>
+                        <p>Stiklių Gatvé, Vilnius Old Town, Lithuania</p>
+                    </div>
+                </div>
+                <div class="visit-detail">
+                    <i class="fas fa-clock"></i>
+                    <div class="visit-detail-content">
+                        <h4>Opening Hours</h4>
+                        <p>Every Day: 10:00 AM – 11:00 PM</p>
+                    </div>
+                </div>
+                <div class="visit-detail">
+                    <i class="fas fa-envelope"></i>
+                    <div class="visit-detail-content">
+                        <h4>Reservations</h4>
+                        <p>Recommended — especially for afternoon tea and weekends</p>
+                    </div>
+                </div>
+                <div class="visit-detail">
+                    <i class="fas fa-camera"></i>
+                    <div class="visit-detail-content">
+                        <h4>Photography</h4>
+                        <p>Visit at opening (10 AM) for the best empty-space photos</p>
+                    </div>
+                </div>
+            </div>
+            <div class="visit-map reveal reveal-delay-1">
+                <iframe 
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2306.0!2d25.2890!3d54.6835!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x46dd9410!2sStikli%C5%B3+g.+7%2C+Vilnius!5e0!3m2!1sen!2slt!4v1600000000000!5m2!1sen!2slt"
+                    allowfullscreen="" 
+                    loading="lazy">
+                </iframe>
+            </div>
+        </div>
+    </section>
+
+    <!-- Reviews Section -->
+    <section class="reviews" id="reviews">
+        <div class="container">
+            <div class="section-header reveal">
+                <span class="section-label">What People Say</span>
+                <h2 class="section-title">Guest Voices</h2>
+                <p class="section-subtitle">Lovers, travelers, and dreamers who found magic beneath the roses.</p>
+            </div>
+            <div class="reviews-grid">
+                <div class="review-card reveal">
+                    <div class="review-stars">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <p class="review-text">
+                        "One of my favourite cafés in Vilnius. The decor is absolutely stunning — 
+                        pink glittery walls, huge baubles, and a pink unicorn. The coffee and 
+                        croissants were divine."
+                    </p>
+                    <div class="review-author">
+                        <div class="review-avatar">S</div>
+                        <div>
+                            <div class="review-name">Sophie Pearce</div>
+                            <div class="review-source">Third Eye Traveller</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="review-card reveal reveal-delay-1">
+                    <div class="review-stars">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <p class="review-text">
+                        "Absolutely charmingly beautiful on the outside as well as the inside. 
+                        I felt like going to a lovely rose garden. Perfect for a quick break 
+                        with tea or coffee."
+                    </p>
+                    <div class="review-author">
+                        <div class="review-avatar">F</div>
+                        <div>
+                            <div class="review-name">Fei Xien Chang</div>
+                            <div class="review-source">Trip.com Travel Expert</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="review-card reveal reveal-delay-2">
+                    <div class="review-stars">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <p class="review-text">
+                        "The most Instagrammable café in Vilnius! The seasonal displays are 
+                        incredible — they win competitions. Fast becoming the city's most 
+                        photographed spot. Have your camera ready!"
+                    </p>
+                    <div class="review-author">
+                        <div class="review-avatar">T</div>
+                        <div>
+                            <div class="review-name">Travel Photographer</div>
+                            <div class="review-source">TripAdvisor Review</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <h3>Augustas ir Barbora</h3>
+                <p>
+                    A love story café in the heart of Vilnius Old Town. 
+                    Inspired by the legendary romance of Barbora Radvilaitė 
+                    and Žygimantas Augustas. Where every visit is a chapter 
+                    in an eternal love story.
+                </p>
+                <div class="social-links">
+                    <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" aria-label="TripAdvisor"><i class="fab fa-tripadvisor"></i></a>
+                </div>
+            </div>
+            <div class="footer-links">
+                <h4>Navigate</h4>
+                <ul>
+                    <li><a href="#legend">The Legend</a></li>
+                    <li><a href="#menu">Menu</a></li>
+                    <li><a href="#experience">Experience</a></li>
+                    <li><a href="#visit">Visit</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h4>Menu</h4>
+                <ul>
+                    <li><a href="#menu">Champagne Breakfast</a></li>
+                    <li><a href="#menu">Afternoon Tea</a></li>
+                    <li><a href="#menu">Cocktails</a></li>
+                    <li><a href="#menu">Desserts</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h4>Visit</h4>
+                <ul>
+                    <li><a href="#visit">Stiklių Gatvé, Vilnius</a></li>
+                    <li><a href="#visit">Daily: 10:00 – 23:00</a></li>
+                    <li><a href="#visit">Reservations Recommended</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p> Augustas ir Barbora Love Story Café. Inspired by eternal love in Vilnius, Lithuania.</p>
+        </div>
+    </footer>
+
+    <!-- Lightbox -->
+    <div class="lightbox" id="lightbox" onclick="closeLightbox()">
+        <span class="lightbox-close">&times;</span>
+        <img src="" alt="Gallery" id="lightbox-img">
+    </div>
+
+    <script>
+        // Navbar scroll
+        window.addEventListener('scroll', () => {
+            const navbar = document.getElementById('navbar');
+            navbar.classList.toggle('scrolled', window.scrollY > 50);
+        });
+
+        // Scroll reveal
+        const revealElements = document.querySelectorAll('.reveal');
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) entry.target.classList.add('active');
+            });
+        }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+        revealElements.forEach(el => revealObserver.observe(el));
+
+        // Lightbox
+        function openLightbox(element) {
+            document.getElementById('lightbox-img').src = element.querySelector('img').src;
+            document.getElementById('lightbox').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+        function closeLightbox() {
+            document.getElementById('lightbox').classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            });
+        });
+    </script>
+</body>
+</html>
